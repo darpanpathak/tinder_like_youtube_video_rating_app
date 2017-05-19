@@ -1,0 +1,70 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>Home</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(true)" (throwoutright)="voteUp(false)" id="card-stack">
+        <ion-card #mycards1 swing-card *ngFor="let c of cards">
+
+            <iframe *ngIf="c.id.videoId" id="ytplayer" type="text/html" width="100%" height="360" [src]="'https://www.youtube.com/embed/' + c.id.videoId | safe" frameborder="0"></iframe>
+            <ion-row padding>
+
+                <h3> {{c.snippet.title}} </h3>
+
+                <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="handleratings($event)">
+                </rating>
+            </ion-row>
+
+            <ion-row padding>
+                <ion-col>
+                    <button ion-button clear small icon-left color="primary" (click)="voteUp(true)">
+            <ion-icon name="thumbs-up"></ion-icon>
+            Yes
+          </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button clear small icon-left color="primary" (click)="voteUp(false)">
+            <ion-icon name="thumbs-down"></ion-icon>
+            No
+          </button>
+                </ion-col>
+            </ion-row>
+
+            <!--<ion-item *ngIf="c.picture">
+                <ion-avatar item-left>
+                    <img *ngIf="c.picture" [src]="c.picture.medium">
+                </ion-avatar>
+                <h2>{{ c.name.first }} {{ c.name.last}}</h2>
+                <p>{{ c.email }}</p>
+            </ion-item>
+
+            <ion-card-content *ngIf="c.location">
+                From: {{ c.location.city }}, {{ c.location.postcode }}<br> Phone: {{ c.phone }}
+            </ion-card-content>
+
+            <ion-row *ngIf="c.name">
+                <ion-col>
+                    <button ion-button clear small icon-left color="primary" (click)="voteUp(true)">
+            <ion-icon name="thumbs-up"></ion-icon>
+            Yes
+          </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button clear small icon-left color="primary" (click)="voteUp(false)">
+            <ion-icon name="thumbs-down"></ion-icon>
+            No
+          </button>
+                </ion-col>
+            </ion-row>-->
+        </ion-card>
+    </div>
+    <!--<p style="text-align: center; width: 100%;">{{ recentCard }}</p>-->
+
+    <!--<button ion-button secondary menuToggle>Toggle Menu</button>-->
+</ion-content>
